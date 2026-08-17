@@ -1,0 +1,10 @@
+# Build output
+Source/**/obj/
+Source/**/bin/
+*.user
+*.suo
+.vs/
+.idea/
+
+# The compiled mod assembly is committed on purpose (1.6/Assemblies/SpeedRim.dll)
+# so the repository can be dropped straight into RimWorld's Mods folder.

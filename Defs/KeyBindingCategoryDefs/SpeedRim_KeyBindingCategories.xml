@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <KeyBindingCategoryDef>
+    <defName>SpeedRim_TimeControls</defName>
+    <label>SpeedRim: extra game speeds</label>
+    <description>Keys for the extra game speeds added by SpeedRim.</description>
+    <isGameUniversal>true</isGameUniversal>
+  </KeyBindingCategoryDef>
+
+</Defs>

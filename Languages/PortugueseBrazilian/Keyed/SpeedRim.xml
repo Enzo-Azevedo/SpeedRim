@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SpeedRim.ModTitle>SpeedRim - Velocidades Extras</SpeedRim.ModTitle>
+
+  <SpeedRim.ButtonTooltip>Velocidade do jogo: {0}</SpeedRim.ButtonTooltip>
+  <SpeedRim.ButtonTooltipWithKey>Velocidade do jogo: {0}\n\nAtalho: {1}</SpeedRim.ButtonTooltipWithKey>
+
+  <SpeedRim.Settings.MultipliersHeader>Multiplicadores de velocidade</SpeedRim.Settings.MultipliersHeader>
+  <SpeedRim.Settings.MultiplierLabel>Botão {0}: {1}x a velocidade normal</SpeedRim.Settings.MultiplierLabel>
+  <SpeedRim.Settings.MultipliersNote>Estes são valores alvo. A velocidade real depende do seu processador, do tamanho da colônia e da quantidade de mods: o RimWorld interrompe o processamento do quadro assim que a taxa de quadros mínima seria ultrapassada, então máquinas mais lentas simplesmente não alcançam os números mais altos.</SpeedRim.Settings.MultipliersNote>
+
+  <SpeedRim.Settings.ShowButtons>Mostrar os botões extras de velocidade</SpeedRim.Settings.ShowButtons>
+  <SpeedRim.Settings.ShowButtonsTip>Desenha três botões extras à esquerda dos controles de tempo originais. Desative para usar apenas os atalhos de teclado.</SpeedRim.Settings.ShowButtonsTip>
+  <SpeedRim.Settings.ExtendKeys>Estender as teclas de acelerar/desacelerar</SpeedRim.Settings.ExtendKeys>
+  <SpeedRim.Settings.ExtendKeysTip>Permite que as teclas originais de acelerar e desacelerar passem da velocidade Super-rápida para as velocidades extras.</SpeedRim.Settings.ExtendKeysTip>
+  <SpeedRim.Settings.RespectForcedNormal>Reduzir a velocidade em eventos importantes</SpeedRim.Settings.RespectForcedNormal>
+  <SpeedRim.Settings.RespectForcedNormalTip>Quando o jogo força a velocidade normal por alguns instantes (a chegada de um ataque, por exemplo), as velocidades extras também obedecem. Desative para manter a velocidade escolhida nesses momentos.</SpeedRim.Settings.RespectForcedNormalTip>
+
+  <SpeedRim.Settings.ButtonOffsetHeader>Posição da fileira de botões</SpeedRim.Settings.ButtonOffsetHeader>
+  <SpeedRim.Settings.ButtonOffsetX>Deslocamento horizontal: {0} px</SpeedRim.Settings.ButtonOffsetX>
+  <SpeedRim.Settings.ButtonOffsetY>Deslocamento vertical: {0} px</SpeedRim.Settings.ButtonOffsetY>
+  <SpeedRim.Settings.Reset>Restaurar padrões</SpeedRim.Settings.Reset>
+
+</LanguageData>

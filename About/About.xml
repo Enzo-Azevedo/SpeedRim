@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <packageId>enzoazevedo.speedrim</packageId>
+  <name>SpeedRim - Extra Game Speeds (5x / 10x / 20x)</name>
+  <author>Enzo Azevedo</author>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+  </loadAfter>
+  <description>Adds three extra game speeds - 5x, 10x and 20x - on top of RimWorld's own pause / 1x / 2x / 3x controls.
+
+WHAT YOU GET
+- Three extra buttons next to the vanilla time controls.
+- Hotkeys 5, 6 and 7 by default (rebindable in Options - Keyboard configuration).
+- The vanilla "speed up" / "slow down" keys keep working and now climb all the way to 20x.
+- Mod settings: change each multiplier (2x to 100x), hide the buttons, move the button row, and choose whether the extra speeds obey the game's temporary "back to normal speed" moments such as a raid arriving.
+
+HOW FAST IT REALLY GOES
+The multipliers are targets, not promises. RimWorld stops ticking a frame as soon as it would fall under its minimum framerate, so a large colony or a slow CPU will simply run below the number on the button instead of freezing.
+
+SAFE TO ADD AND REMOVE
+Can be added to an existing save. When the game saves, the active speed is written to the file as a normal vanilla speed, so a save made at 20x still loads correctly if you later remove this mod.
+
+Requires Harmony. Built for RimWorld 1.6.
+
+------------------------------------------------------------
+
+PORTUGUES (BRASIL)
+
+Adiciona tres velocidades extras - 5x, 10x e 20x - alem dos controles originais do RimWorld (pausa / 1x / 2x / 3x).
+
+O QUE O MOD FAZ
+- Tres botoes extras ao lado dos controles de tempo originais.
+- Atalhos 5, 6 e 7 por padrao (reconfiguraveis em Opcoes - Configuracao de teclado).
+- As teclas originais de acelerar e desacelerar continuam funcionando e agora chegam ate 20x.
+- Configuracoes: altere cada multiplicador (2x a 100x), esconda os botoes, reposicione a fileira e escolha se as velocidades extras respeitam os momentos em que o jogo volta a velocidade normal (a chegada de um ataque, por exemplo).
+
+VELOCIDADE REAL
+Os multiplicadores sao alvos, nao garantias. O RimWorld interrompe o processamento do quadro assim que ficaria abaixo da taxa de quadros minima, entao colonias grandes ou processadores mais lentos apenas rodam abaixo do numero do botao, sem travar.
+
+PODE SER ADICIONADO E REMOVIDO
+Funciona em partidas ja iniciadas. Ao salvar, a velocidade ativa e gravada no arquivo como uma velocidade normal do jogo, entao um save feito em 20x continua carregando corretamente caso o mod seja removido depois.
+
+Requer o Harmony. Feito para o RimWorld 1.6.</description>
+</ModMetaData>

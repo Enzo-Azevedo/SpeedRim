@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SpeedRim.ModTitle>SpeedRim - Extra Game Speeds</SpeedRim.ModTitle>
+
+  <SpeedRim.ButtonTooltip>Game speed: {0}</SpeedRim.ButtonTooltip>
+  <SpeedRim.ButtonTooltipWithKey>Game speed: {0}\n\nHotkey: {1}</SpeedRim.ButtonTooltipWithKey>
+
+  <SpeedRim.Settings.MultipliersHeader>Speed multipliers</SpeedRim.Settings.MultipliersHeader>
+  <SpeedRim.Settings.MultiplierLabel>Button {0}: {1}x normal speed</SpeedRim.Settings.MultiplierLabel>
+  <SpeedRim.Settings.MultipliersNote>These are target speeds. How fast the game actually runs depends on your CPU, colony size and how many mods you use: RimWorld stops ticking a frame once it would drop below its minimum framerate, so a slow machine will simply not reach the higher numbers.</SpeedRim.Settings.MultipliersNote>
+
+  <SpeedRim.Settings.ShowButtons>Show the extra speed buttons</SpeedRim.Settings.ShowButtons>
+  <SpeedRim.Settings.ShowButtonsTip>Draws three extra buttons to the left of the vanilla time controls. Turn this off to use the hotkeys only.</SpeedRim.Settings.ShowButtonsTip>
+  <SpeedRim.Settings.ExtendKeys>Extend the "faster"/"slower" keys</SpeedRim.Settings.ExtendKeys>
+  <SpeedRim.Settings.ExtendKeysTip>Lets the vanilla speed up / slow down keys step past Superfast into the extra speeds.</SpeedRim.Settings.ExtendKeysTip>
+  <SpeedRim.Settings.RespectForcedNormal>Slow down for important events</SpeedRim.Settings.RespectForcedNormal>
+  <SpeedRim.Settings.RespectForcedNormalTip>When the game briefly forces normal speed (a raid arriving, for example), the extra speeds obey it too. Turning this off keeps the game running at the chosen speed through those moments.</SpeedRim.Settings.RespectForcedNormalTip>
+
+  <SpeedRim.Settings.ButtonOffsetHeader>Button row position</SpeedRim.Settings.ButtonOffsetHeader>
+  <SpeedRim.Settings.ButtonOffsetX>Horizontal offset: {0} px</SpeedRim.Settings.ButtonOffsetX>
+  <SpeedRim.Settings.ButtonOffsetY>Vertical offset: {0} px</SpeedRim.Settings.ButtonOffsetY>
+  <SpeedRim.Settings.Reset>Reset to defaults</SpeedRim.Settings.Reset>
+
+</LanguageData>

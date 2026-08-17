@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <KeyBindingDef>
+    <defName>SpeedRim_Speed5x</defName>
+    <label>Game speed: 5x</label>
+    <category>SpeedRim_TimeControls</category>
+    <defaultKeyCodeA>Alpha5</defaultKeyCodeA>
+    <defaultKeyCodeB>Keypad5</defaultKeyCodeB>
+  </KeyBindingDef>
+
+  <KeyBindingDef>
+    <defName>SpeedRim_Speed10x</defName>
+    <label>Game speed: 10x</label>
+    <category>SpeedRim_TimeControls</category>
+    <defaultKeyCodeA>Alpha6</defaultKeyCodeA>
+    <defaultKeyCodeB>Keypad6</defaultKeyCodeB>
+  </KeyBindingDef>
+
+  <KeyBindingDef>
+    <defName>SpeedRim_Speed20x</defName>
+    <label>Game speed: 20x</label>
+    <category>SpeedRim_TimeControls</category>
+    <defaultKeyCodeA>Alpha7</defaultKeyCodeA>
+    <defaultKeyCodeB>Keypad7</defaultKeyCodeB>
+  </KeyBindingDef>
+
+</Defs>
