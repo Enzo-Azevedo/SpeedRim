@@ -56,9 +56,14 @@ namespace SpeedRim.Patches
             }
         }
 
+        private static readonly string[] CachedTooltips = new string[3];
+        private static readonly float[] CachedMultipliers = new float[3] { -1f, -1f, -1f };
+        private static readonly KeyCode[] CachedMainKeys = new KeyCode[3] { KeyCode.None, KeyCode.None, KeyCode.None };
+
         public static void Postfix(Rect timerRect)
         {
-            if (!SpeedRimMod.Settings.showSpeedButtons)
+            SpeedRimSettings settings = SpeedRimMod.Settings;
+            if (!settings.showSpeedButtons)
             {
                 return;
             }
@@ -80,8 +85,8 @@ namespace SpeedRim.Patches
             int count = SpeedRimSpeeds.Extra.Length;
 
             Rect rowRect = new Rect(
-                timerRect.x - buttonWidth * count + SpeedRimMod.Settings.buttonOffsetX,
-                timerRect.y + SpeedRimMod.Settings.buttonOffsetY,
+                timerRect.x - buttonWidth * count + settings.buttonOffsetX,
+                timerRect.y + settings.buttonOffsetY,
                 buttonWidth * count,
                 buttonHeight);
 
@@ -126,14 +131,38 @@ namespace SpeedRim.Patches
 
         private static string TooltipFor(TimeSpeed speed)
         {
+            int tier = SpeedRimSpeeds.TierIndexOf(speed);
+            float multiplier = SpeedRimSpeeds.MultiplierOf(speed);
             KeyBindingDef binding = SpeedRimSpeeds.KeyBindingOf(speed);
-            string speedLabel = SpeedRimSpeeds.LabelOf(speed);
-            if (binding == null || binding.MainKey == KeyCode.None)
+            KeyCode mainKey = binding != null ? binding.MainKey : KeyCode.None;
+
+            if (tier >= 0 && tier < CachedTooltips.Length
+                && CachedTooltips[tier] != null
+                && CachedMultipliers[tier] == multiplier
+                && CachedMainKeys[tier] == mainKey)
             {
-                return "SpeedRim.ButtonTooltip".Translate(speedLabel);
+                return CachedTooltips[tier];
             }
 
-            return "SpeedRim.ButtonTooltipWithKey".Translate(speedLabel, binding.MainKeyLabel);
+            string speedLabel = SpeedRimSpeeds.LabelOf(speed);
+            string tooltip;
+            if (binding == null || mainKey == KeyCode.None)
+            {
+                tooltip = "SpeedRim.ButtonTooltip".Translate(speedLabel);
+            }
+            else
+            {
+                tooltip = "SpeedRim.ButtonTooltipWithKey".Translate(speedLabel, binding.MainKeyLabel);
+            }
+
+            if (tier >= 0 && tier < CachedTooltips.Length)
+            {
+                CachedMultipliers[tier] = multiplier;
+                CachedMainKeys[tier] = mainKey;
+                CachedTooltips[tier] = tooltip;
+            }
+
+            return tooltip;
         }
     }
 }
