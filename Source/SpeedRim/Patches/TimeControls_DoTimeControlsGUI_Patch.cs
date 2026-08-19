@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -56,9 +57,12 @@ namespace SpeedRim.Patches
             }
         }
 
-        private static readonly string[] CachedTooltips = new string[3];
-        private static readonly float[] CachedMultipliers = new float[3] { -1f, -1f, -1f };
-        private static readonly KeyCode[] CachedMainKeys = new KeyCode[3] { KeyCode.None, KeyCode.None, KeyCode.None };
+        // Tooltip text only changes when the tier's multiplier, its key binding or the active
+        // language changes, so it is built once per change instead of once per frame.
+        private static readonly string[] CachedTooltips = new string[SpeedRimSpeeds.Extra.Length];
+        private static readonly float[] CachedMultipliers = new float[SpeedRimSpeeds.Extra.Length];
+        private static readonly KeyCode[] CachedMainKeys = new KeyCode[SpeedRimSpeeds.Extra.Length];
+        private static LoadedLanguage cachedLanguage;
 
         public static void Postfix(Rect timerRect)
         {
@@ -136,12 +140,23 @@ namespace SpeedRim.Patches
             KeyBindingDef binding = SpeedRimSpeeds.KeyBindingOf(speed);
             KeyCode mainKey = binding != null ? binding.MainKey : KeyCode.None;
 
-            if (tier >= 0 && tier < CachedTooltips.Length
-                && CachedTooltips[tier] != null
-                && CachedMultipliers[tier] == multiplier
-                && CachedMainKeys[tier] == mainKey)
+            bool cacheable = tier >= 0 && tier < CachedTooltips.Length;
+            if (cacheable)
             {
-                return CachedTooltips[tier];
+                // The language can only be changed from the main menu, but these statics outlive
+                // that, so a cached tooltip would otherwise stay in the previous language.
+                if (cachedLanguage != LanguageDatabase.activeLanguage)
+                {
+                    cachedLanguage = LanguageDatabase.activeLanguage;
+                    Array.Clear(CachedTooltips, 0, CachedTooltips.Length);
+                }
+
+                if (CachedTooltips[tier] != null
+                    && CachedMultipliers[tier] == multiplier
+                    && CachedMainKeys[tier] == mainKey)
+                {
+                    return CachedTooltips[tier];
+                }
             }
 
             string speedLabel = SpeedRimSpeeds.LabelOf(speed);
@@ -155,7 +170,7 @@ namespace SpeedRim.Patches
                 tooltip = "SpeedRim.ButtonTooltipWithKey".Translate(speedLabel, binding.MainKeyLabel);
             }
 
-            if (tier >= 0 && tier < CachedTooltips.Length)
+            if (cacheable)
             {
                 CachedMultipliers[tier] = multiplier;
                 CachedMainKeys[tier] = mainKey;
