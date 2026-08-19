@@ -53,13 +53,18 @@ namespace SpeedRim
         /// <summary>Tick rate multiplier configured for one of the extra speeds.</summary>
         public static float MultiplierOf(TimeSpeed speed)
         {
-            int tier = TierIndexOf(speed);
-            if (tier < 0)
+            SpeedRimSettings settings = SpeedRimMod.Settings;
+            switch (speed)
             {
-                return 1f;
+                case Speed5x:
+                    return settings.multiplierTier1;
+                case Speed10x:
+                    return settings.multiplierTier2;
+                case Speed20x:
+                    return settings.multiplierTier3;
+                default:
+                    return 1f;
             }
-
-            return SpeedRimMod.Settings.MultiplierForTier(tier);
         }
 
         /// <summary>Short label such as "10x", used for tooltips and settings.</summary>
@@ -70,12 +75,16 @@ namespace SpeedRim
 
         public static KeyBindingDef KeyBindingOf(TimeSpeed speed)
         {
-            switch (TierIndexOf(speed))
+            switch (speed)
             {
-                case 0: return SpeedRimKeyBindingDefOf.SpeedRim_Speed5x;
-                case 1: return SpeedRimKeyBindingDefOf.SpeedRim_Speed10x;
-                case 2: return SpeedRimKeyBindingDefOf.SpeedRim_Speed20x;
-                default: return null;
+                case Speed5x:
+                    return SpeedRimKeyBindingDefOf.SpeedRim_Speed5x;
+                case Speed10x:
+                    return SpeedRimKeyBindingDefOf.SpeedRim_Speed10x;
+                case Speed20x:
+                    return SpeedRimKeyBindingDefOf.SpeedRim_Speed20x;
+                default:
+                    return null;
             }
         }
 
