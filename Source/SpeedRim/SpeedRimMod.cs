@@ -10,6 +10,9 @@ namespace SpeedRim
     {
         public const string PackageId = "enzoazevedo.speedrim";
 
+        /// <summary>Arbitrary but stable key so RimWorld reports the missing settings only once.</summary>
+        private const int MissingSettingsLogKey = 0x5DE0;
+
         private static SpeedRimSettings settings;
 
         public SpeedRimMod(ModContentPack content) : base(content)
@@ -23,9 +26,22 @@ namespace SpeedRim
 
         public static SpeedRimSettings Settings
         {
-            // Never null: RimWorld constructs the Mod before anything can ask for a tick rate,
-            // but a fallback keeps the patches harmless if that ever changes.
-            get { return settings ?? (settings = new SpeedRimSettings()); }
+            get
+            {
+                if (settings == null)
+                {
+                    // RimWorld constructs the Mod before anything can ask for a tick rate, so this
+                    // is a broken assumption rather than a normal path. Falling back to defaults
+                    // keeps the game playable, but it should not do so quietly.
+                    Log.ErrorOnce(
+                        "[SpeedRim] Settings were requested before the mod was constructed. Falling "
+                        + "back to the default multipliers; the configured ones are not in effect.",
+                        MissingSettingsLogKey);
+                    settings = new SpeedRimSettings();
+                }
+
+                return settings;
+            }
         }
 
         public override string SettingsCategory()

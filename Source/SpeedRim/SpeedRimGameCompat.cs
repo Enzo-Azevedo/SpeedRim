@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using HarmonyLib;
 using Verse;
 
@@ -10,7 +11,7 @@ namespace SpeedRim
     /// </summary>
     internal static class SpeedRimGameCompat
     {
-        private static readonly Func<TickManager, AcceptanceReport> PlayerCanControlGetter = ResolvePlayerCanControl();
+        private static Func<TickManager, AcceptanceReport> playerCanControlGetter = ResolvePlayerCanControl();
 
         /// <summary>
         /// Whether the player is allowed to change the game speed at all right now. Vanilla uses
@@ -23,17 +24,23 @@ namespace SpeedRim
                 return false;
             }
 
-            if (PlayerCanControlGetter == null)
+            Func<TickManager, AcceptanceReport> getter = playerCanControlGetter;
+            if (getter == null)
             {
                 return true;
             }
 
             try
             {
-                return PlayerCanControlGetter(tickManager).Accepted;
+                return getter(tickManager).Accepted;
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                // This runs every frame, so stop asking after the first failure. Dropping the
+                // getter also keeps the report below to a single entry instead of a log flood.
+                playerCanControlGetter = null;
+                Log.Error("[SpeedRim] TickManager.PlayerCanControl threw; the extra speeds will "
+                          + "ignore it for the rest of this session: " + exception);
                 return true;
             }
         }
@@ -42,13 +49,13 @@ namespace SpeedRim
         {
             try
             {
-                if (AccessTools.PropertyGetter(typeof(TickManager), "PlayerCanControl") == null)
+                MethodInfo getter = AccessTools.PropertyGetter(typeof(TickManager), "PlayerCanControl");
+                if (getter == null)
                 {
                     return null;
                 }
 
-                return AccessTools.MethodDelegate<Func<TickManager, AcceptanceReport>>(
-                    AccessTools.PropertyGetter(typeof(TickManager), "PlayerCanControl"));
+                return AccessTools.MethodDelegate<Func<TickManager, AcceptanceReport>>(getter);
             }
             catch (Exception)
             {
