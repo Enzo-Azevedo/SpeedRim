@@ -54,7 +54,14 @@ namespace SpeedRim.Patches
             }
         }
 
-        public static void Postfix(TickManager __instance, SavedSpeeds __state)
+        /// <summary>
+        /// Restores the extra speed the prefix put aside. This is a finalizer rather than a postfix
+        /// on purpose: a postfix is skipped when the original method throws, which would leave the
+        /// player silently on the fallback speed if a save failed halfway through. A finalizer runs
+        /// either way, and returning void leaves any exception on its way out untouched.
+        /// </summary>
+        [HarmonyFinalizer]
+        public static void Finalizer(TickManager __instance, SavedSpeeds __state)
         {
             if (!__state.restoreNeeded || CurTimeSpeedField == null)
             {
