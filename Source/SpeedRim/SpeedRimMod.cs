@@ -79,6 +79,25 @@ namespace SpeedRim
                 "SpeedRim.Settings.RespectForcedNormalTip".Translate());
 
             listing.GapLine();
+            listing.Label("SpeedRim.Settings.FramerateHeader".Translate());
+            listing.Label("SpeedRim.Settings.FramerateNote".Translate());
+            listing.Gap(4f);
+            listing.CheckboxLabeled("SpeedRim.Settings.KeepMinimumFps".Translate(), ref s.keepMinimumFps,
+                "SpeedRim.Settings.KeepMinimumFpsTip".Translate());
+
+            if (s.keepMinimumFps)
+            {
+                s.minimumFps = Mathf.Round(listing.SliderLabeled(
+                    "SpeedRim.Settings.MinimumFps".Translate(s.minimumFps.ToString("0")),
+                    s.minimumFps,
+                    SpeedRimFpsGovernor.MinimumFpsFloor,
+                    SpeedRimFpsGovernor.MinimumFpsCeiling));
+            }
+
+            listing.CheckboxLabeled("SpeedRim.Settings.ShowReadout".Translate(), ref s.showSpeedReadout,
+                "SpeedRim.Settings.ShowReadoutTip".Translate());
+
+            listing.GapLine();
             listing.Label("SpeedRim.Settings.ButtonOffsetHeader".Translate());
             s.buttonOffsetX = Mathf.Round(listing.SliderLabeled(
                 "SpeedRim.Settings.ButtonOffsetX".Translate(s.buttonOffsetX.ToString("0")), s.buttonOffsetX, -400f, 400f));
@@ -97,6 +116,7 @@ namespace SpeedRim
         public override void WriteSettings()
         {
             Settings.Clamp();
+            SpeedRimFpsGovernor.Reset();
             base.WriteSettings();
         }
     }

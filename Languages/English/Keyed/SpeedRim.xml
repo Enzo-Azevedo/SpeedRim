@@ -17,6 +17,18 @@
   <SpeedRim.Settings.RespectForcedNormal>Slow down for important events</SpeedRim.Settings.RespectForcedNormal>
   <SpeedRim.Settings.RespectForcedNormalTip>When the game briefly forces normal speed (a raid arriving, for example), the extra speeds obey it too. Turning this off keeps the game running at the chosen speed through those moments.</SpeedRim.Settings.RespectForcedNormalTip>
 
+  <SpeedRim.Readout>{0}x - {1} FPS</SpeedRim.Readout>
+  <SpeedRim.ReadoutTip>The speed the game is actually reaching, measured from the ticks it manages each second. 60 ticks per second is 1x. At high multipliers this sits below the number on the button whenever the processor cannot keep up.</SpeedRim.ReadoutTip>
+  <SpeedRim.ReadoutTipGoverned>The speed the game is actually reaching, measured from the ticks it manages each second. 60 ticks per second is 1x.\n\nSpeedRim is holding the game at {1}% of the requested speed to keep {0} FPS.</SpeedRim.ReadoutTipGoverned>
+
+  <SpeedRim.Settings.FramerateHeader>Framerate</SpeedRim.Settings.FramerateHeader>
+  <SpeedRim.Settings.FramerateNote>At the higher multipliers the game spends most of each frame simulating, which is what drags the framerate down: the picture stutters because the processor is busy, not because the graphics are heavy. These options let you decide where that cost lands.</SpeedRim.Settings.FramerateNote>
+  <SpeedRim.Settings.KeepMinimumFps>Give up speed to keep a minimum framerate</SpeedRim.Settings.KeepMinimumFps>
+  <SpeedRim.Settings.KeepMinimumFpsTip>While one of the extra speeds is active, the game runs slower than asked whenever the framerate falls under the chosen floor, and picks the speed back up as soon as it recovers. Vanilla speeds are never touched, and speed is never given up below 3x - if the game cannot hold the framerate there, the extra speeds are not what is costing the frame.</SpeedRim.Settings.KeepMinimumFpsTip>
+  <SpeedRim.Settings.MinimumFps>Framerate to keep: {0} FPS</SpeedRim.Settings.MinimumFps>
+  <SpeedRim.Settings.ShowReadout>Show the speed actually reached</SpeedRim.Settings.ShowReadout>
+  <SpeedRim.Settings.ShowReadoutTip>Draws the measured speed and framerate next to the time controls, so you can see how much of the requested speed your machine is really delivering.</SpeedRim.Settings.ShowReadoutTip>
+
   <SpeedRim.Settings.ButtonOffsetHeader>Button row position</SpeedRim.Settings.ButtonOffsetHeader>
   <SpeedRim.Settings.ButtonOffsetX>Horizontal offset: {0} px</SpeedRim.Settings.ButtonOffsetX>
   <SpeedRim.Settings.ButtonOffsetY>Vertical offset: {0} px</SpeedRim.Settings.ButtonOffsetY>

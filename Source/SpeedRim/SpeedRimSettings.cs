@@ -23,6 +23,15 @@ namespace SpeedRim
         /// <summary>Honour vanilla's temporary forced-normal-speed (raid arriving, etc.).</summary>
         public bool respectForcedNormalSpeed = true;
 
+        /// <summary>Give up speed, while an extra speed is active, to keep <see cref="minimumFps"/>.</summary>
+        public bool keepMinimumFps;
+
+        /// <summary>Framerate to protect. Lower means a faster, choppier game; higher means the opposite.</summary>
+        public float minimumFps = 30f;
+
+        /// <summary>Show the speed the game is actually reaching next to the buttons.</summary>
+        public bool showSpeedReadout;
+
         /// <summary>Fine tuning for the button row position, in pixels.</summary>
         public float buttonOffsetX;
         public float buttonOffsetY;
@@ -63,6 +72,9 @@ namespace SpeedRim
             showSpeedButtons = true;
             extendFasterSlowerKeys = true;
             respectForcedNormalSpeed = true;
+            keepMinimumFps = false;
+            minimumFps = 30f;
+            showSpeedReadout = false;
             buttonOffsetX = 0f;
             buttonOffsetY = 0f;
         }
@@ -76,6 +88,9 @@ namespace SpeedRim
             Scribe_Values.Look(ref showSpeedButtons, "showSpeedButtons", true);
             Scribe_Values.Look(ref extendFasterSlowerKeys, "extendFasterSlowerKeys", true);
             Scribe_Values.Look(ref respectForcedNormalSpeed, "respectForcedNormalSpeed", true);
+            Scribe_Values.Look(ref keepMinimumFps, "keepMinimumFps");
+            Scribe_Values.Look(ref minimumFps, "minimumFps", 30f);
+            Scribe_Values.Look(ref showSpeedReadout, "showSpeedReadout");
             Scribe_Values.Look(ref buttonOffsetX, "buttonOffsetX");
             Scribe_Values.Look(ref buttonOffsetY, "buttonOffsetY");
 
@@ -91,6 +106,7 @@ namespace SpeedRim
             multiplierTier1 = Mathf.Clamp(multiplierTier1, SpeedRimSpeeds.MinMultiplier, SpeedRimSpeeds.MaxMultiplier);
             multiplierTier2 = Mathf.Clamp(multiplierTier2, SpeedRimSpeeds.MinMultiplier, SpeedRimSpeeds.MaxMultiplier);
             multiplierTier3 = Mathf.Clamp(multiplierTier3, SpeedRimSpeeds.MinMultiplier, SpeedRimSpeeds.MaxMultiplier);
+            minimumFps = Mathf.Clamp(minimumFps, SpeedRimFpsGovernor.MinimumFpsFloor, SpeedRimFpsGovernor.MinimumFpsCeiling);
             buttonOffsetX = Mathf.Clamp(buttonOffsetX, -400f, 400f);
             buttonOffsetY = Mathf.Clamp(buttonOffsetY, -400f, 400f);
         }
