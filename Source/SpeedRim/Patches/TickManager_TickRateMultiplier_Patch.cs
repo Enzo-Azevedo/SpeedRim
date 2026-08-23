@@ -35,7 +35,8 @@ namespace SpeedRim.Patches
                 return false;
             }
 
-            float multiplier = SpeedRimSpeeds.MultiplierOf(speed);
+            // Asked for by the player, then reduced by the governor when the framerate needs it.
+            float multiplier = SpeedRimFpsGovernor.Govern(SpeedRimSpeeds.MultiplierOf(speed));
 
             // With no map loaded (caravan travel on the world map) vanilla runs far faster than
             // any on-map speed. Never make that case slower than vanilla would have been.

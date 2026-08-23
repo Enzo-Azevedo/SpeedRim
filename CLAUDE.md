@@ -58,5 +58,8 @@ code a cosmetic refactor makes worse.
   instead of crashing — killing a player's UI is worse than running on defaults —
   but every fallback reports itself in the log. Degrading is a decision to declare,
   never a silence.
+- `SpeedRimFpsGovernor` is a feedback loop, which is state by definition. It is kept honest by
+  three rules: it only moves on frames this mod is responsible for, it never governs vanilla's own
+  speeds, and it never gives up speed below 3x — below that the frame is not ours to explain.
 - `Array.IndexOf` over the six-entry speed ladder stays as it is: six elements, once
   per keypress. Replacing it would be optimisation without a dominant cost.

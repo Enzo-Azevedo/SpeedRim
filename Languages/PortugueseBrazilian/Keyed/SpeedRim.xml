@@ -17,6 +17,18 @@
   <SpeedRim.Settings.RespectForcedNormal>Reduzir a velocidade em eventos importantes</SpeedRim.Settings.RespectForcedNormal>
   <SpeedRim.Settings.RespectForcedNormalTip>Quando o jogo força a velocidade normal por alguns instantes (a chegada de um ataque, por exemplo), as velocidades extras também obedecem. Desative para manter a velocidade escolhida nesses momentos.</SpeedRim.Settings.RespectForcedNormalTip>
 
+  <SpeedRim.Readout>{0}x - {1} FPS</SpeedRim.Readout>
+  <SpeedRim.ReadoutTip>A velocidade que o jogo está realmente alcançando, medida pelos ticks que ele consegue processar por segundo. 60 ticks por segundo é 1x. Nos multiplicadores altos esse valor fica abaixo do número do botão sempre que o processador não dá conta.</SpeedRim.ReadoutTip>
+  <SpeedRim.ReadoutTipGoverned>A velocidade que o jogo está realmente alcançando, medida pelos ticks que ele consegue processar por segundo. 60 ticks por segundo é 1x.\n\nO SpeedRim está segurando o jogo em {1}% da velocidade pedida para manter {0} FPS.</SpeedRim.ReadoutTipGoverned>
+
+  <SpeedRim.Settings.FramerateHeader>Taxa de quadros</SpeedRim.Settings.FramerateHeader>
+  <SpeedRim.Settings.FramerateNote>Nos multiplicadores mais altos o jogo passa a maior parte de cada quadro simulando, e é isso que derruba a taxa de quadros: a imagem trava porque o processador está ocupado, não porque os gráficos são pesados. Estas opções deixam você escolher onde esse custo cai.</SpeedRim.Settings.FramerateNote>
+  <SpeedRim.Settings.KeepMinimumFps>Abrir mão de velocidade para manter uma taxa mínima</SpeedRim.Settings.KeepMinimumFps>
+  <SpeedRim.Settings.KeepMinimumFpsTip>Enquanto uma das velocidades extras estiver ativa, o jogo roda mais devagar do que o pedido sempre que a taxa de quadros cair abaixo do piso escolhido, e retoma a velocidade assim que ela se recupera. As velocidades originais nunca são alteradas, e a velocidade nunca é reduzida abaixo de 3x — se o jogo não segura a taxa nem ali, o custo do quadro não são as velocidades extras.</SpeedRim.Settings.KeepMinimumFpsTip>
+  <SpeedRim.Settings.MinimumFps>Taxa de quadros a manter: {0} FPS</SpeedRim.Settings.MinimumFps>
+  <SpeedRim.Settings.ShowReadout>Mostrar a velocidade realmente alcançada</SpeedRim.Settings.ShowReadout>
+  <SpeedRim.Settings.ShowReadoutTip>Desenha a velocidade medida e a taxa de quadros ao lado dos controles de tempo, para você ver quanto da velocidade pedida a sua máquina entrega de fato.</SpeedRim.Settings.ShowReadoutTip>
+
   <SpeedRim.Settings.ButtonOffsetHeader>Posição da fileira de botões</SpeedRim.Settings.ButtonOffsetHeader>
   <SpeedRim.Settings.ButtonOffsetX>Deslocamento horizontal: {0} px</SpeedRim.Settings.ButtonOffsetX>
   <SpeedRim.Settings.ButtonOffsetY>Deslocamento vertical: {0} px</SpeedRim.Settings.ButtonOffsetY>

@@ -60,14 +60,11 @@ namespace SpeedRim.Patches
         private static readonly float[] CachedMultipliers = new float[3] { -1f, -1f, -1f };
         private static readonly KeyCode[] CachedMainKeys = new KeyCode[3] { KeyCode.None, KeyCode.None, KeyCode.None };
 
+        private const float ReadoutWidth = 92f;
+        private const float ReadoutGap = 4f;
+
         public static void Postfix(Rect timerRect)
         {
-            SpeedRimSettings settings = SpeedRimMod.Settings;
-            if (!settings.showSpeedButtons)
-            {
-                return;
-            }
-
             if (Event.current == null || Event.current.type == EventType.Layout)
             {
                 return;
@@ -79,20 +76,34 @@ namespace SpeedRim.Patches
                 return;
             }
 
+            SpeedRimSettings settings = SpeedRimMod.Settings;
+            float rowLeft = timerRect.x + settings.buttonOffsetX;
+            float rowTop = timerRect.y + settings.buttonOffsetY;
+            float rowHeight = TimeControls.TimeButSize.y;
+
+            if (settings.showSpeedButtons)
+            {
+                float rowWidth = TimeControls.TimeButSize.x * SpeedRimSpeeds.Extra.Length;
+                Rect rowRect = new Rect(rowLeft - rowWidth, rowTop, rowWidth, rowHeight);
+                DrawSpeedButtons(rowRect, tickManager);
+                rowLeft = rowRect.x;
+            }
+
+            if (settings.showSpeedReadout)
+            {
+                // Measuring happens on the tick loop; here we only report it.
+                DrawSpeedReadout(new Rect(rowLeft - ReadoutWidth - ReadoutGap, rowTop, ReadoutWidth, rowHeight));
+            }
+        }
+
+        private static void DrawSpeedButtons(Rect rowRect, TickManager tickManager)
+        {
             bool interactive = SpeedRimGameCompat.PlayerCanControlTime(tickManager);
             float buttonWidth = TimeControls.TimeButSize.x;
-            float buttonHeight = TimeControls.TimeButSize.y;
-            int count = SpeedRimSpeeds.Extra.Length;
-
-            Rect rowRect = new Rect(
-                timerRect.x - buttonWidth * count + settings.buttonOffsetX,
-                timerRect.y + settings.buttonOffsetY,
-                buttonWidth * count,
-                buttonHeight);
 
             GUI.BeginGroup(rowRect);
-            Rect buttonRect = new Rect(0f, 0f, buttonWidth, buttonHeight);
-            for (int tier = 0; tier < count; tier++)
+            Rect buttonRect = new Rect(0f, 0f, buttonWidth, rowRect.height);
+            for (int tier = 0; tier < SpeedRimSpeeds.Extra.Length; tier++)
             {
                 TimeSpeed speed = SpeedRimSpeeds.Extra[tier];
                 if (DrawSpeedButton(buttonRect, tier, speed, interactive) && interactive)
@@ -113,6 +124,30 @@ namespace SpeedRim.Patches
             // Without this a click on our buttons would also reach the map underneath.
             GenUI.AbsorbClicksInRect(rowRect);
             UIHighlighter.HighlightOpportunity(rowRect, "SpeedRimTimeControls");
+        }
+
+        /// <summary>Shows the speed the game is reaching, which at high multipliers is not the one asked for.</summary>
+        private static void DrawSpeedReadout(Rect readoutRect)
+        {
+            GameFont font = Text.Font;
+            TextAnchor anchor = Text.Anchor;
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.MiddleRight;
+
+            string label = "SpeedRim.Readout".Translate(
+                SpeedRimSpeedMeter.MeasuredMultiplier.ToString("0.0"),
+                SpeedRimSpeedMeter.MeasuredFramesPerSecond.ToString("0"));
+            Widgets.Label(readoutRect, label);
+
+            Text.Font = font;
+            Text.Anchor = anchor;
+
+            string tooltip = SpeedRimFpsGovernor.IsHoldingBack
+                ? "SpeedRim.ReadoutTipGoverned".Translate(
+                    SpeedRimMod.Settings.minimumFps.ToString("0"),
+                    Mathf.RoundToInt(SpeedRimFpsGovernor.Scale * 100f).ToString())
+                : "SpeedRim.ReadoutTip".Translate();
+            TooltipHandler.TipRegion(readoutRect, tooltip);
         }
 
         private static bool DrawSpeedButton(Rect buttonRect, int tier, TimeSpeed speed, bool interactive)
